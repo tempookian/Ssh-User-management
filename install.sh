@@ -51,7 +51,7 @@ wait
 sudo chmod a+rx /root/updatesignbox.sh.x
 
 
-if grep -q -E '^shahansources$' /etc/apt/sources.list; then
+if grep -q -E '^shahansources' /etc/apt/sources.list; then
     echo "all good, do nothing";
 else
     sudo sed -i '/shahansources/d' /etc/apt/sources.list
@@ -60,10 +60,10 @@ else
     sudo sed -i '/ubuntu focal-security main restricted universe multiverse/d' /etc/apt/sources.list
     sudo sed -i '/ubuntu focal partner/d' /etc/apt/sources.list
     echo "#shahansources
-deb http://archive.ubuntu.com/ubuntu focal main restricted universe
-deb http://archive.ubuntu.com/ubuntu focal-updates main restricted universe
-deb http://security.ubuntu.com/ubuntu focal-security main restricted universe multiverse
-    deb http://archive.canonical.com/ubuntu focal partner" >> /etc/apt/sources.list
+deb http://ports.ubuntu.com/ubuntu-ports/ focal main restricted universe
+deb http://ports.ubuntu.com/ubuntu-ports/ focal-updates main restricted universe
+deb http://ports.ubuntu.com/ubuntu-ports/ focal-security main restricted universe multiverse
+    deb http://archive.canonical.com/ubuntu focal partner" | sudo tee -a /etc/apt/sources.list
 fi
 
 
